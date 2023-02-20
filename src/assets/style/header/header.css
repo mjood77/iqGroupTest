@@ -1,0 +1,73 @@
+.header {
+  padding: 50px 70px 15px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #C0C0C0;
+}
+.header .header__btns {
+  position: relative;
+}
+.header .header__btns .header__btns__addEvent {
+  box-shadow: 1px 1px 5px black, -1px -1px 5px black, -1px 1px 5px black, 1px -1px 5px black, 0 1px 5px black, 1px 0 5px black, 0 0 5px black;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  position: absolute;
+  display: block;
+  padding: 60px 20px 20px;
+  width: 320px;
+  background: var(--whiteColor);
+  bottom: -165px;
+  left: -10%;
+  -webkit-clip-path: polygon(33% 4%, 40% 17%, 100% 16%, 100% 100%, 0 100%, 0 17%, 26% 16%);
+          clip-path: polygon(33% 4%, 40% 17%, 100% 16%, 100% 100%, 0 100%, 0 17%, 26% 16%);
+}
+.header .header__btns .header__btns__addEvent .iconCloseAddEvent {
+  position: absolute;
+  top: 22%;
+  right: 10px;
+}
+.header .header__btns .header__btns__addEvent .header__btns__addEvent__input {
+  padding: 5px;
+  width: 95%;
+  display: block;
+  margin: 0 auto;
+}
+.header .header__btns .header__btns__addEvent .header__btns__addEvent__btn {
+  margin: 10px;
+}
+.header .header__btns .header__btns__addEvent__active {
+  opacity: 1;
+  visibility: visible;
+}
+.header .header__search {
+  position: relative;
+  width: 25%;
+}
+.header .header__search .header__search__domInput .fa-search {
+  width: 38px;
+  height: 38;
+  line-height: 38px;
+  background-color: var(--mainColor);
+  color: var(--whiteColor);
+  text-align: center;
+  transition: opacity 0.5s ease-out;
+}
+.header .header__search .header__search__domInput .fa-search:hover {
+  opacity: 0.7;
+}
+.header .header__search .header__search__domInput .header__search__domInput__input {
+  width: 80%;
+  padding: 5px 40px 5px 10px;
+}
+.header .header__search .header__search__domInput .iconColoseSearch {
+  position: absolute;
+  top: 32%;
+  right: 15%;
+  opacity: 0;
+  visibility: hidden;
+}
+.header .header__search .header__search__domInput .iconColoseSearch__active {
+  opacity: 1;
+  visibility: visible;
+}/*# sourceMappingURL=header.css.map */
