@@ -8,7 +8,7 @@ function Table() {
   let currentMonth = today.getMonth();
   let currentYear = today.getFullYear();
   let months = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
-  var monthLabel;
+
   showCalendar(currentMonth,currentYear);
   //functions
 
@@ -16,6 +16,7 @@ function Table() {
   function next() {
     currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
     currentMonth = (currentMonth + 1) % 12;
+    document.querySelector('.valueLabel').innerHTML = months[currentMonth] +" "+ currentYear;
     showCalendar(currentMonth, currentYear);
   }
 
@@ -23,13 +24,19 @@ function Table() {
   function previous() {
     currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
     currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+    document.querySelector('.valueLabel').innerHTML = months[currentMonth] +" "+ currentYear;
     showCalendar(currentMonth,currentYear);
   }
 
   //check how many days was in last month or after month
-  function howManyDaysInMonth(currentMonth,currentYear){
-    currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
-    currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+  function howManyDaysInMonth(currentMonth,currentYear,beforeMonth = true){
+    if(beforeMonth === true){
+      currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+      currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+    }else{
+      currentYear = (currentMonth === 11)? currentYear+1: currentYear;
+      currentMonth = (currentMonth + 1) % 12;
+    }
     let firstDay = (new Date(currentYear, currentMonth)).getDay();
     let daysInMonth = 32 - new Date(currentYear, currentMonth, 32).getDate();
     return {days: daysInMonth,dayOne: firstDay,month: currentMonth,year: currentYear};
@@ -37,11 +44,12 @@ function Table() {
 
   //show calendar
   function showCalendar(month, year) {
+    localStorage.setItem("infoLastMonth",JSON.stringify([]));  
+    localStorage.setItem("rows",JSON.stringify([]));    
     let firstDay = (new Date(year, month)).getDay();
     let daysInMonth = 32 - new Date(year, month, 32).getDate();
     let infoLastMonth = howManyDaysInMonth(month,year);
     let checkDiffrentBwMonths = firstDay -1;
-    monthLabel = month;
     // clearing all previous cells
     let rows = [];
     let date = 1;
@@ -94,7 +102,7 @@ function Table() {
     <section className='calendar'>
       <div className='calendar__controls'>
         <input type="submit" value="<" name='beforeMonth' className='calendar__controls__beforeMonth btns' onClick={previous}/>
-        {parser(`<label>${months[monthLabel]}</label>`)}
+        <label className='valueLabel'>{months[currentMonth]+" "+currentYear}</label>
         <input type="submit" value=">" name='afterMonth' className='calendar__controls__afterMonth btns' onClick={next} />
         <input type="submit" name="today" className='calendar__controls__today btns' value="Cегодня"/>
       </div>
